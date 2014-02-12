@@ -3,8 +3,6 @@ package ool.com.ofpa.service;
 
 import java.lang.reflect.Type;
 
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -24,8 +22,7 @@ public class OfpaServiceImpl implements OfpaService {
 
 	private Gson gson = new Gson();
 
-	@PUT
-	@Path("/")
+	@Override
 	public Response doPut(@RequestBody String body) {
 		PutBusiness put = new PutBusiness();
 		ResultOut result_out = put.put();

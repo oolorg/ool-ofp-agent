@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface OfpaService {
 	@PUT
 	@Path("/")
-	Response doPut(@RequestBody String body);
+	public Response doPut(@RequestBody String body);
 }

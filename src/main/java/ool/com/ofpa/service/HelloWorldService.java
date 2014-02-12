@@ -16,19 +16,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Path("/sample")
 public interface HelloWorldService {
-	
+
     @GET
     @Path("/hello/{message}")
     @Produces({ MediaType.APPLICATION_JSON })
-    String sayHello(@PathParam("message") String message, @Context HttpServletRequest req, @Context HttpServletResponse res);
-    
+    public String sayHello(@PathParam("message") String message, @Context HttpServletRequest req, @Context HttpServletResponse res);
+
     @GET
     @Path("/hello")
-    String allHello();
-    
+    public String allHello();
+
     @POST
     @Path("/hello/create")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    Response createHello(@RequestBody String params);
+    public Response createHello(@RequestBody String params);
 }

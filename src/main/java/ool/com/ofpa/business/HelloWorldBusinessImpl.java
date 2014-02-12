@@ -7,8 +7,8 @@ package ool.com.ofpa.business;
 
 import javax.servlet.http.HttpServletRequest;
 
-import ool.com.ofpa.client.DBClient;
-import ool.com.ofpa.client.Neo4jDBClientImpl;
+import ool.com.ofpa.client.OFCClient;
+import ool.com.ofpa.client.RyuOFCClientImpl;
 import ool.com.ofpa.json.HelloWorldJsonPostIn;
 import ool.com.ofpa.json.HelloWorldJsonPostOut;
 import ool.com.ofpa.validate.HelloWorldValidate;
@@ -38,7 +38,7 @@ public class HelloWorldBusinessImpl implements HelloWorldBusiness {
     	HelloWorldJsonPostOut ret = new HelloWorldJsonPostOut();
     	try {
 			validator.postValidation();
-			DBClient dbClient = Neo4jDBClientImpl.getInstance();
+			OFCClient dbClient = RyuOFCClientImpl.getInstance();
 			dbClient.exec();
 			ret.setEnabled("OK");
 		} catch (ValidateException e) {

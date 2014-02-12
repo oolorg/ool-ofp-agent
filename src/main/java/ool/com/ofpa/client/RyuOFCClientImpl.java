@@ -9,16 +9,16 @@ package ool.com.ofpa.client;
  * @author 1131080355959
  *
  */
-public class Neo4jDBClientImpl implements DBClient {
+public class RyuOFCClientImpl implements OFCClient {
 	
-	private static Neo4jDBClientImpl instance = null;
+	private static RyuOFCClientImpl instance = null;
 	
-	private Neo4jDBClientImpl() {
+	private RyuOFCClientImpl() {
 	}
 	
-	public static Neo4jDBClientImpl getInstance() {
+	public static RyuOFCClientImpl getInstance() {
 		if (instance == null) {
-			instance = new Neo4jDBClientImpl();
+			instance = new RyuOFCClientImpl();
 		}
 		return instance;
 	}

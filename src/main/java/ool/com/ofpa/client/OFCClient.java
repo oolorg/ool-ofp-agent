@@ -9,6 +9,6 @@ package ool.com.ofpa.client;
  * @author 1131080355959
  *
  */
-public interface DBClient {
+public interface OFCClient {
 	void exec();
 }
