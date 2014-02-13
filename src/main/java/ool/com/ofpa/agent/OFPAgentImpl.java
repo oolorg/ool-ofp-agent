@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 import ool.com.ofpa.utils.Definition;
@@ -33,11 +34,14 @@ public class OFPAgentImpl extends HttpServlet{
             FlowEntryIn inPara = gson.fromJson(body, inType);
             // auth check
             AgentManager agentMan = new AgentManager();
-            outPara = agentMan.Modify(inPara);
+			outPara = agentMan.Modify(inPara);
         } catch (JsonSyntaxException e) {
             outPara.setStatus(Definition.STATUS_INTERNAL_ERROR);
             outPara.setMessage(e.getMessage());
-        }
+		} catch (OFPException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         // response
         res.setContentType("application/json; charset=UTF-8"); 
         PrintWriter w = res.getWriter();
