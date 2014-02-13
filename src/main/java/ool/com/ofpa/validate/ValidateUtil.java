@@ -5,11 +5,13 @@
  */
 package ool.com.ofpa.validate;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * @author 1131080355959
  *
  */
-public abstract class BaseValidate {
+public abstract class ValidateUtil {
 	
     //abstract boolean checkNullAndEmpty(String value);
 
@@ -23,7 +25,19 @@ public abstract class BaseValidate {
     protected static boolean checkNull(Object value) {
     	return value == null;
     }
-	
+
+    /**
+     * 文字列Emptyチェック
+     * @param value
+     * @return empty true, not empty false 
+     */
+    protected static boolean checkEmpty(String value) {
+		if (!StringUtils.isEmpty(value)) {
+			return false;
+		}
+		return true;
+    }
+
     /**
      * 文字サイズをチェック
      * @param value
