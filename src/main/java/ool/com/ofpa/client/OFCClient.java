@@ -10,5 +10,6 @@ package ool.com.ofpa.client;
  *
  */
 public interface OFCClient {
-	void exec();
+	public void doPost(String body) throws OFCException;
+	public void doDelete(String body) throws OFCException;
 }
