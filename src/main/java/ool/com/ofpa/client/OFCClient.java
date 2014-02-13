@@ -5,11 +5,13 @@
  */
 package ool.com.ofpa.client;
 
+import ool.com.ofpa.json.MatchField;
+
 /**
  * @author 1131080355959
  *
  */
 public interface OFCClient {
-	public void doPost(String body) throws OFCException;
-	public void doDelete(String body) throws OFCException;
+	public void doPost(MatchField param) throws OFCException;
+	public void doDelete(MatchField param) throws OFCException;
 }
