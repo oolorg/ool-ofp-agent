@@ -65,6 +65,11 @@
 		<artifactId>guice</artifactId>
 		<version>3.0</version>
 	</dependency>
+	<dependency>
+		<groupId>com.googlecode.jmockit</groupId>
+		<artifactId>jmockit</artifactId>
+		<version>1.5</version>
+	</dependency>
   </dependencies>
   <build>
     <finalName>OFPatchAgent</finalName>
