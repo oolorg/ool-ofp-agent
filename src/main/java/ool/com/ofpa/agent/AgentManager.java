@@ -3,6 +3,8 @@ package ool.com.ofpa.agent;
 import java.util.List;
 import java.util.Map;
 
+import ool.com.ofpa.client.OFCException;
+import ool.com.ofpa.client.RyuOFCClientImpl;
 import ool.com.ofpa.json.*;
 import ool.com.ofpa.utils.Definition;
 import ool.com.ofpa.validate.*;
@@ -20,38 +22,38 @@ public class AgentManager {
             return ret;
         }
 
-//        // delete process
-//        for (List<FlowModify> fe :param.getList()) {
-//            MatchField ofcParam;
-//            if ((fe.getType()).equals("delete")){
-//                RyuOFCClient ofcClient = new RyuOFCClientImpl(fe.getOfcUrl());
-//                ofcParam.setIP(fe.getIp());
-//                ofcParam.setInPort(fe.getInPort());
-//                ofcParam.setOutPort(fe.getOutPort());
-//                try {
-//                    ofcClient.doDelete(fe);
-//                } catch (OFCException oe){
-//                    ret.setStatus(Definition.STATUS_BAD_REQUEST);
-//                    ret.setMessage(oe.getMessage());
-//                }
-//            }
-//        }
-//        // create process
-//        for (List<FlowModify> fe :param.getList()) {
-//            MatchField ofcParam;
-//            if ((fe.getType()).equals("create")){
-//                RyuOFCClient ofcClient = new RyuOFCClientImpl(fe.getOfcUrl());
-//                ofcParam.setIP(fe.getIp());
-//                ofcParam.setInPort(fe.getInPort());
-//                ofcParam.setOutPort(fe.getOutPort());
-//                try {
-//                    ofcClient.doDelete(fe);
-//                } catch (OFCException oe){
-//                    ret.setStatus(Definition.STATUS_BAD_REQUEST);
-//                    ret.setMessage(oe.getMessage());
-//                }
-//            }
-//        }
+        // delete process
+        for (FlowModify fe :param.getList()) {
+            if ((fe.getType()).equals("delete")){
+                MatchField ofcParam = new MatchField();
+            	RyuOFCClientImpl ofcClient = new RyuOFCClientImpl(fe.getOfcUrl());
+                ofcParam.setIp(fe.getIp());
+                ofcParam.setInPort(fe.getInPort());
+                ofcParam.setOutPort(fe.getOutPort());
+                try {
+                    ofcClient.doDelete(fe);
+                } catch (OFCException oe){
+                    ret.setStatus(Definition.STATUS_BAD_REQUEST);
+                    ret.setMessage(oe.getMessage());
+                }
+            }
+        }
+        // create process
+        for (FlowModify fe :param.getList()) {
+            if ((fe.getType()).equals("create")){
+                MatchField ofcParam = new MatchField();
+            	RyuOFCClientImpl ofcClient = new RyuOFCClientImpl(fe.getOfcUrl());
+                ofcParam.setIp(fe.getIp());
+                ofcParam.setInPort(fe.getInPort());
+                ofcParam.setOutPort(fe.getOutPort());
+                try {
+                    ofcClient.doDelete(fe);
+                } catch (OFCException oe){
+                    ret.setStatus(Definition.STATUS_BAD_REQUEST);
+                    ret.setMessage(oe.getMessage());
+                }
+            }
+        }
         return ret;
     }
 
