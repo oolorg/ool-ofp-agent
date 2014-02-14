@@ -15,7 +15,7 @@ public class AgentBusinessImpl implements AgentBusiness {
 	@Override
 	public OFPResponseOut Modify(FlowEntryIn param) {
         OFPResponseOut ret = new OFPResponseOut();
-        ret.setStatus(Definition.STATUS_CREATED);
+        ret.setStatus(Definition.STATUS_SUCCESS);
         ret.setMessage("");
         ValidateFlowEntry checkValidate = new ValidateFlowEntry(param.getList());
         try {
