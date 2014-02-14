@@ -56,9 +56,10 @@ public class RyuOFCClientImpl implements OFCClient {
 		resource = Client.create().resource(url);
 		Gson gson = new Gson();
 		try {
-			String body = gson.toJson(param, MatchField.class);
-			response = resource.accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON)
-					.entity(body).delete(ClientResponse.class);
+//			String body = gson.toJson(param, MatchField.class);
+//			response = resource.accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON)
+//					.entity(body).delete(ClientResponse.class);
+			response = resource.accept(MediaType.APPLICATION_JSON).delete(ClientResponse.class);
 			String json = response.getEntity(String.class);
 			OfcDeleteOut res = gson.fromJson(json, OfcDeleteOut.class);
 			if (res.getStatus() != Definition.STATUS_SUCCESS) {
