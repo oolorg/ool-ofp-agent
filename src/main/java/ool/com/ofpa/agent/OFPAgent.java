@@ -26,7 +26,7 @@ public class OFPAgent extends HttpServlet {
         Gson gson = new Gson();
         OFPResponseOut outPara = new OFPResponseOut();
         try {
-            // json竊丹bject
+            // json->object
             BufferedReader bufferReaderBody = new BufferedReader(req.getReader());
             String body = bufferReaderBody.readLine();
 
