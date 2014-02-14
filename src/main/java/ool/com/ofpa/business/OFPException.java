@@ -1,4 +1,4 @@
-package ool.com.ofpa.agent;
+package ool.com.ofpa.business;
 
 public class OFPException extends Exception {
 	

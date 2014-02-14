@@ -11,14 +11,14 @@
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 
 
-<!-- 	<context:component-scan base-package="jp.sample.jaxrs" />
+	<context:component-scan base-package="jp.sample.jaxrs" />
 
 	<jaxrs:server id="OFPatchAgent" address="/ctrl">
     	<jaxrs:serviceBeans>
-        	<ref bean="OFPAgent" />
+        	<ref bean="OfpaService" />
     	</jaxrs:serviceBeans>
 	</jaxrs:server>
 
-	<bean id="OFPAgent" class="ool.com.ofpm.agent.OFPAgent" />  -->
+	<bean id="OfpaService" class="ool.com.ofpm.service.OfpaServiceImpl" />
 
 </beans>

@@ -2,17 +2,16 @@ package ool.com.ofpa.service;
 
 import java.lang.reflect.Type;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import ool.com.ofpa.business.AgentBusiness;
+import ool.com.ofpa.business.AgentBusinessImpl;
+import ool.com.ofpa.business.OFPException;
 import ool.com.ofpa.json.FlowEntryIn;
+import ool.com.ofpa.json.OFPResponseOut;
 
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -42,7 +41,13 @@ public class OfpaServiceImpl implements OfpaService {
         FlowEntryIn inPara = gson.fromJson(params, type);
         
         OfpaServiceImpl main = injector.getInstance(OfpaServiceImpl.class);
-    	OFPResponseOut res = main.ab.createHello(inPara);
+
+        OFPResponseOut res = null;
+		try {
+			res = main.ab.Modify(inPara);
+		} catch (OFPException e) {
+			e.printStackTrace();
+		}
     	
         type = new TypeToken<OFPResponseOut>(){}.getType();
         String outPara = gson.toJson(res, type);

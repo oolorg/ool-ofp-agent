@@ -1,4 +1,4 @@
-package ool.com.ofpa.agent;
+package ool.com.ofpa.business;
 
 import ool.com.ofpa.client.OFCException;
 import ool.com.ofpa.client.RyuOFCClientImpl;
@@ -10,9 +10,10 @@ import ool.com.ofpa.utils.Definition;
 import ool.com.ofpa.validate.ValidateException;
 import ool.com.ofpa.validate.ValidateFlowEntry;
 
-public class AgentManager {
+public class AgentBusinessImpl implements AgentBusiness {
 
-    public OFPResponseOut Modify(FlowEntryIn param) throws OFPException {
+	@Override
+	public OFPResponseOut Modify(FlowEntryIn param) throws OFPException {
         OFPResponseOut ret = new OFPResponseOut();
         ValidateFlowEntry checkValidate = new ValidateFlowEntry(param.getList());
         try {

@@ -62,7 +62,37 @@ public class ConfigImpl implements Config {
     }
 
     @Override
-    public String getString(String key) {
+	public int hashCode() {
+		// TODO 自動生成されたメソッド・スタブ
+		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO 自動生成されたメソッド・スタブ
+		return super.equals(obj);
+	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		// TODO 自動生成されたメソッド・スタブ
+		return super.clone();
+	}
+
+	@Override
+	public String toString() {
+		// TODO 自動生成されたメソッド・スタブ
+		return super.toString();
+	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		// TODO 自動生成されたメソッド・スタブ
+		super.finalize();
+	}
+
+	@Override
+	public String getString(String key) {
         String value = getConfiguration().getString(key);
         return value;
     }
