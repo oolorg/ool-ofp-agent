@@ -20,7 +20,7 @@ import com.google.gson.reflect.TypeToken;
 
 public class OFPAgent extends HttpServlet {
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse res)
+	protected void doPut(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
 
         Gson gson = new Gson();
