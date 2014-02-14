@@ -1,13 +1,14 @@
 package ool.com.ofpa.agent;
 
-import java.util.List;
-import java.util.Map;
-
 import ool.com.ofpa.client.OFCException;
 import ool.com.ofpa.client.RyuOFCClientImpl;
-import ool.com.ofpa.json.*;
+import ool.com.ofpa.json.FlowEntryIn;
+import ool.com.ofpa.json.FlowModify;
+import ool.com.ofpa.json.MatchField;
+import ool.com.ofpa.json.OFPResponseOut;
 import ool.com.ofpa.utils.Definition;
-import ool.com.ofpa.validate.*;
+import ool.com.ofpa.validate.ValidateException;
+import ool.com.ofpa.validate.ValidateFlowEntry;
 
 public class AgentManager {
 
