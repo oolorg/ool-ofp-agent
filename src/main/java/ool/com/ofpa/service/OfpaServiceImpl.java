@@ -7,7 +7,6 @@ import javax.ws.rs.core.Response;
 
 import ool.com.ofpa.business.AgentBusiness;
 import ool.com.ofpa.business.AgentBusinessImpl;
-import ool.com.ofpa.business.OFPException;
 import ool.com.ofpa.json.FlowEntryIn;
 import ool.com.ofpa.json.OFPResponseOut;
 
@@ -42,13 +41,8 @@ public class OfpaServiceImpl implements OfpaService {
         
         OfpaServiceImpl main = injector.getInstance(OfpaServiceImpl.class);
 
-        OFPResponseOut res = null;
-		try {
-			res = main.ab.Modify(inPara);
-		} catch (OFPException e) {
-			e.printStackTrace();
-		}
-    	
+        OFPResponseOut res = main.ab.Modify(inPara);
+
         type = new TypeToken<OFPResponseOut>(){}.getType();
         String outPara = gson.toJson(res, type);
         return Response.ok(outPara).type(MediaType.APPLICATION_JSON_TYPE).build();

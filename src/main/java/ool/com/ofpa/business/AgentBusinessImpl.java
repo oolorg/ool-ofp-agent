@@ -13,13 +13,15 @@ import ool.com.ofpa.validate.ValidateFlowEntry;
 public class AgentBusinessImpl implements AgentBusiness {
 
 	@Override
-	public OFPResponseOut Modify(FlowEntryIn param) throws OFPException {
+	public OFPResponseOut Modify(FlowEntryIn param) {
         OFPResponseOut ret = new OFPResponseOut();
+        ret.setStatus(Definition.STATUS_CREATED);
+        ret.setMessage("");
         ValidateFlowEntry checkValidate = new ValidateFlowEntry(param.getList());
         try {
             checkValidate.checkValidate();
         } catch (ValidateException ve) {
-            ret.setStatus(Definition.STATUS_BAD_REQUEST);
+            ret.setStatus(Definition.STATUS_INTERNAL_ERROR);
             ret.setMessage(ve.getMessage());
             return ret;
         }
@@ -35,8 +37,9 @@ public class AgentBusinessImpl implements AgentBusiness {
                 try {
                     ofcClient.doDelete(fe);
                 } catch (OFCException oe){
-                    ret.setStatus(Definition.STATUS_BAD_REQUEST);
+                    ret.setStatus(oe.getStatusCode());
                     ret.setMessage(oe.getMessage());
+                    return ret;
                 }
             }
         }
@@ -51,8 +54,9 @@ public class AgentBusinessImpl implements AgentBusiness {
                 try {
                     ofcClient.doPost(fe);
                 } catch (OFCException oe){
-                    ret.setStatus(Definition.STATUS_BAD_REQUEST);
+                    ret.setStatus(oe.getStatusCode());
                     ret.setMessage(oe.getMessage());
+                    return ret;
                 }
             }
         }
