@@ -19,6 +19,6 @@
     	</jaxrs:serviceBeans>
 	</jaxrs:server>
 
-	<bean id="OfpaService" class="ool.com.ofpm.service.OfpaServiceImpl" />
+	<bean id="OfpaService" class="ool.com.ofpa.service.OfpaServiceImpl" />
 
 </beans>

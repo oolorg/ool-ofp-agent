@@ -49,7 +49,7 @@ public class AgentBusinessImpl implements AgentBusiness {
                 ofcParam.setInPort(fe.getInPort());
                 ofcParam.setOutPort(fe.getOutPort());
                 try {
-                    ofcClient.doDelete(fe);
+                    ofcClient.doPost(fe);
                 } catch (OFCException oe){
                     ret.setStatus(Definition.STATUS_BAD_REQUEST);
                     ret.setMessage(oe.getMessage());

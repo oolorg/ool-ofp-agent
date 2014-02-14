@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Path("/")
 public interface OfpaService {
 	@PUT
-	@Path("/ofpa/ctrl")
+	@Path("/")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
 	public Response doPut(@RequestBody String body);
