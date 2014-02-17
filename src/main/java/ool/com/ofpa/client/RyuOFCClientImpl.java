@@ -4,12 +4,17 @@
  * @TODO 
  */
 package ool.com.ofpa.client;
+import java.util.HashMap;
+
 import javax.ws.rs.core.MediaType;
+
+import org.apache.commons.lang.StringUtils;
 
 import ool.com.ofpa.json.MatchField;
 import ool.com.ofpa.json.OfcCreateOut;
 import ool.com.ofpa.json.OfcDeleteOut;
 import ool.com.ofpa.utils.Definition;
+import ool.com.ofpa.utils.OolUtils;
 
 import com.google.gson.Gson;
 import com.sun.jersey.api.client.Client;
@@ -52,8 +57,15 @@ public class RyuOFCClientImpl implements OFCClient {
 	}
 
 	@Override
-	public void doDelete(MatchField param) throws OFCException {
-		resource = Client.create().resource(url);
+	public void doDelete(final MatchField param) throws OFCException {
+		String query = OolUtils.parseMapQuery(
+				new HashMap<String, String>() {
+					{
+						put("ip", param.getIp());
+						put("port", StringUtils.join(param.getPort().iterator(), ","));
+					}
+				});
+		resource = Client.create().resource(url + "?" + query);
 		Gson gson = new Gson();
 		try {
 //			String body = gson.toJson(param, MatchField.class);

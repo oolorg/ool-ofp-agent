@@ -30,9 +30,7 @@ public class OolUtils {
             if (build.length() > 0) {
                 build.append("&");
             }
-            build.append(e.getKey());
-            build.append("=");
-            build.append(e.getValue());
+            build.append(e.getKey()).append("=").append(e.getValue());
         }
         return build.toString();
     }

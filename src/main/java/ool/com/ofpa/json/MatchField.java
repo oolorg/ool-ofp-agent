@@ -1,25 +1,20 @@
 package ool.com.ofpa.json;
 
+import java.util.List;
+
 public class MatchField {
 	private String ip;
-	private String inPort;
-	private String outPort;
+	private List<Integer> port;
 	public String getIp() {
 		return ip;
 	}
 	public void setIp(final String ip) {
 		this.ip = ip;
 	}
-	public String getInPort() {
-		return inPort;
+	public List<Integer> getPort() {
+		return port;
 	}
-	public void setInPort(final String inPort) {
-		this.inPort = inPort;
-	}
-	public String getOutPort() {
-		return outPort;
-	}
-	public void setOutPort(final String outPort) {
-		this.outPort = outPort;
+	public void setPort(final List<Integer> port) {
+		this.port = port;
 	}
 }

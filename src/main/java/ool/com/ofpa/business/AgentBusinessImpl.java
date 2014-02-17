@@ -20,27 +20,27 @@ public class AgentBusinessImpl implements AgentBusiness {
         ValidateFlowEntry checkValidate = new ValidateFlowEntry(param.getList());
         try {
             checkValidate.checkValidate();
+			reqMod(param);
         } catch (ValidateException ve) {
-            ret.setStatus(Definition.STATUS_INTERNAL_ERROR);
+            ret.setStatus(Definition.STATUS_BAD_REQUEST);
             ret.setMessage(ve.getMessage());
             return ret;
-        }
+		} catch (OFCException oe) {
+            ret.setStatus(oe.getStatusCode());
+            ret.setMessage(oe.getMessage());
+		}
+        return ret;
+    }
 
+	private void reqMod(FlowEntryIn param) throws OFCException {
         // delete process
         for (FlowModify fe :param.getList()) {
             if ((fe.getType()).equals("delete")){
                 MatchField ofcParam = new MatchField();
             	RyuOFCClientImpl ofcClient = new RyuOFCClientImpl(fe.getOfcUrl());
                 ofcParam.setIp(fe.getIp());
-                ofcParam.setInPort(fe.getInPort());
-                ofcParam.setOutPort(fe.getOutPort());
-                try {
-                    ofcClient.doDelete(fe);
-                } catch (OFCException oe){
-                    ret.setStatus(oe.getStatusCode());
-                    ret.setMessage(oe.getMessage());
-                    return ret;
-                }
+                ofcParam.setPort(fe.getPort());
+                ofcClient.doDelete(fe);
             }
         }
         // create process
@@ -49,18 +49,9 @@ public class AgentBusinessImpl implements AgentBusiness {
                 MatchField ofcParam = new MatchField();
             	RyuOFCClientImpl ofcClient = new RyuOFCClientImpl(fe.getOfcUrl());
                 ofcParam.setIp(fe.getIp());
-                ofcParam.setInPort(fe.getInPort());
-                ofcParam.setOutPort(fe.getOutPort());
-                try {
-                    ofcClient.doPost(fe);
-                } catch (OFCException oe){
-                    ret.setStatus(oe.getStatusCode());
-                    ret.setMessage(oe.getMessage());
-                    return ret;
-                }
+                ofcParam.setPort(fe.getPort());
+                ofcClient.doPost(fe);
             }
         }
-        return ret;
-    }
-
+	}
 }

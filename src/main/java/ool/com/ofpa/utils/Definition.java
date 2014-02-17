@@ -27,5 +27,6 @@ public class Definition {
     public static final String HTTP_PUT = "PUT";
     public static final String HTTP_DELETE = "DELETE";
 	
+    public static final int PARAM_PORT_LENGTH = 2;
 
 }

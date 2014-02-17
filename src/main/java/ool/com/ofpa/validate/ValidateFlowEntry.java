@@ -3,6 +3,7 @@ package ool.com.ofpa.validate;
 import java.util.List;
 
 import ool.com.ofpa.json.FlowModify;
+import ool.com.ofpa.utils.Definition;
 
 public class ValidateFlowEntry {
 	private List<FlowModify> params;
@@ -11,20 +12,23 @@ public class ValidateFlowEntry {
 	}
 	public void checkValidate() throws ValidateException {
 		for (FlowModify val : params) {
-			if(ValidateUtil.checkEmpty(val.getOfcUrl())) {
+			if (ValidateUtil.checkEmpty(val.getOfcUrl())) {
 				throw new ValidateException("ofcUrl is null/empty");
 			}
-			if(ValidateUtil.checkEmpty(val.getIp())) {
+			if (ValidateUtil.checkEmpty(val.getIp())) {
 				throw new ValidateException("ip is null/empty");
 			}
-			if(ValidateUtil.checkEmpty(val.getType())) {
+			if (ValidateUtil.checkEmpty(val.getType())) {
 				throw new ValidateException("type is null/empty");
 			}
-			if(ValidateUtil.checkEmpty(val.getInPort())) {
-				throw new ValidateException("inPort is null/empty");
+			if (null == val.getPort()) {
+				throw new ValidateException("port is null");
 			}
-			if(ValidateUtil.checkEmpty(val.getOutPort())) {
-				throw new ValidateException("outPort is null/empty");
+			if (Definition.PARAM_PORT_LENGTH > val.getPort().size()) {
+				throw new ValidateException("port is invalid value.");
+			}
+			if (Definition.PARAM_PORT_LENGTH < val.getPort().size()) {
+				throw new ValidateException("port is out of range.");
 			}
 		}
 	}
