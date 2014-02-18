@@ -35,7 +35,7 @@ public class AgentBusinessImpl implements AgentBusiness {
 	private void reqMod(FlowEntryIn param) throws OFCException {
         // delete process
         for (FlowModify fe :param.getList()) {
-            if ((fe.getType()).equals("delete")){
+            if ((fe.getType()).equals("delete")) {
                 MatchField ofcParam = new MatchField();
             	RyuOFCClientImpl ofcClient = new RyuOFCClientImpl(fe.getOfcUrl());
                 ofcParam.setIp(fe.getIp());
@@ -45,7 +45,7 @@ public class AgentBusinessImpl implements AgentBusiness {
         }
         // create process
         for (FlowModify fe :param.getList()) {
-            if ((fe.getType()).equals("create")){
+            if ((fe.getType()).equals("create")) {
                 MatchField ofcParam = new MatchField();
             	RyuOFCClientImpl ofcClient = new RyuOFCClientImpl(fe.getOfcUrl());
                 ofcParam.setIp(fe.getIp());

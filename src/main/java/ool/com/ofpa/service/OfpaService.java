@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.web.bind.annotation.RequestBody;
 
-@Path("/")
+@Path("/ctrl")
 public interface OfpaService {
 	@PUT
 	@Path("/")
