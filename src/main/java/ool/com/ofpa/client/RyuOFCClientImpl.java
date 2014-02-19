@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 
 import ool.com.ofpa.json.MatchField;
 import ool.com.ofpa.json.OfcCreateOut;
@@ -28,6 +29,9 @@ import com.sun.jersey.core.util.MultivaluedMapImpl;
  */
 public class RyuOFCClientImpl implements OFCClient {
 	
+    private static final Logger logger = Logger
+            .getLogger(RyuOFCClientImpl.class);
+
 	private static WebResource resource = null;
 	private static ClientResponse response = null;
 	private String url = null;
@@ -38,6 +42,7 @@ public class RyuOFCClientImpl implements OFCClient {
 
 	@Override
 	public void doPost(MatchField param) throws OFCException {
+        logger.debug(String.format("doPost(param=%s) - start ", param));
 		resource = Client.create().resource(url);
 		Gson gson = new Gson();
 		try {
@@ -47,17 +52,22 @@ public class RyuOFCClientImpl implements OFCClient {
 			String json = response.getEntity(String.class);
 			OfcCreateOut res = gson.fromJson(json, OfcCreateOut.class);
 			if (res.getStatus() != Definition.STATUS_CREATED) {
+				logger.error("ofc post failed. message:" + res.getMessage());
 				throw new OFCException("ofc post failed.", res.getStatus());
 			}
 		} catch (UniformInterfaceException ue) {
+			logger.error(ue.getMessage());
 			throw new OFCException(ue.getMessage(), ue.getResponse().getStatus());
 		} catch (Exception ex) {
+			logger.error(ex.getMessage());
 			throw new OFCException(ex.getMessage(), Definition.STATUS_INTERNAL_ERROR);			
 		}
+		logger.debug("doPost - end");
 	}
 
 	@Override
 	public void doDelete(final MatchField param) throws OFCException {
+        logger.debug(String.format("doDelete(param=%s) - start ", param));
 		resource = Client.create().resource(url);
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
 		queryParams.add("ip", param.getIp());
@@ -68,12 +78,16 @@ public class RyuOFCClientImpl implements OFCClient {
 			String json = response.getEntity(String.class);
 			OfcDeleteOut res = gson.fromJson(json, OfcDeleteOut.class);
 			if (res.getStatus() != Definition.STATUS_SUCCESS) {
+				logger.error("ofc delete failed. message:" + res.getMessage());
 				throw new OFCException("ofc delete failed.", res.getStatus());
 			}
 		} catch (UniformInterfaceException ue) {
+			logger.error(ue.getMessage());
 			throw new OFCException(ue.getMessage(), ue.getResponse().getStatus());
 		} catch (Exception ex) {
+			logger.error(ex.getMessage());
 			throw new OFCException(ex.getMessage(), Definition.STATUS_INTERNAL_ERROR);			
 		}
+		logger.debug("doDelete - end");
 	}
 }

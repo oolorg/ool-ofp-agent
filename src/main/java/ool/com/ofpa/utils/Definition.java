@@ -13,6 +13,7 @@ public class Definition {
 
 	/** configure file. */
 	public static final String DEFAULT_PROPERTIY_FILE = "ofpa.properties";
+	public static final String LOG4J_PROPERTIY_FILE = "log4j.properties";
 
 	/** HTTP Response code. */
     public static final int STATUS_SUCCESS = 200;
