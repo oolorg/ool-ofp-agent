@@ -4,9 +4,9 @@
  * @TODO 
  */
 package ool.com.ofpa.client;
-import java.util.HashMap;
 
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -14,13 +14,13 @@ import ool.com.ofpa.json.MatchField;
 import ool.com.ofpa.json.OfcCreateOut;
 import ool.com.ofpa.json.OfcDeleteOut;
 import ool.com.ofpa.utils.Definition;
-import ool.com.ofpa.utils.OolUtils;
 
 import com.google.gson.Gson;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 /**
  * @author 1131080355959
@@ -58,20 +58,13 @@ public class RyuOFCClientImpl implements OFCClient {
 
 	@Override
 	public void doDelete(final MatchField param) throws OFCException {
-		String query = OolUtils.parseMapQuery(
-				new HashMap<String, String>() {
-					{
-						put("ip", param.getIp());
-						put("port", StringUtils.join(param.getPort().iterator(), ","));
-					}
-				});
-		resource = Client.create().resource(url + "?" + query);
+		resource = Client.create().resource(url);
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("ip", param.getIp());
+		queryParams.add("port", StringUtils.join(param.getPort().iterator(), ","));
 		Gson gson = new Gson();
 		try {
-//			String body = gson.toJson(param, MatchField.class);
-//			response = resource.accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON)
-//					.entity(body).delete(ClientResponse.class);
-			response = resource.accept(MediaType.APPLICATION_JSON).delete(ClientResponse.class);
+			response = resource.queryParams(queryParams).accept(MediaType.APPLICATION_JSON).delete(ClientResponse.class);
 			String json = response.getEntity(String.class);
 			OfcDeleteOut res = gson.fromJson(json, OfcDeleteOut.class);
 			if (res.getStatus() != Definition.STATUS_SUCCESS) {
