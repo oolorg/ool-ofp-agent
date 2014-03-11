@@ -11,6 +11,9 @@ public class ValidateFlowEntry {
 		this.params = params;
 	}
 	public void checkValidate() throws ValidateException {
+		if (params.size() == 0) {
+			throw new ValidateException("request not found.");
+		}
 		for (FlowModify val : params) {
 			if (ValidateUtil.checkEmpty(val.getOfcUrl())) {
 				throw new ValidateException("ofcUrl is null/empty");
